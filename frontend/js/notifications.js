@@ -1,4 +1,4 @@
-// notifications.js - Manejo de notificaciones push y recordatorios
+// Manejo de notificaciones push y recordatorios
 
 // Solicitar permiso para notificaciones
 export const requestNotificationPermission = async () => {
@@ -25,7 +25,7 @@ export const showNotification = (title, options = {}) => {
     const notification = new Notification(title, {
       icon: '/assets/icons/icon-192x192.png',
       badge: '/assets/icons/icon-72x72.png',
-      vibrate: [200, 100, 200], // Patrón de vibración
+      vibrate: [200, 100, 200],
       ...options,
     });
     
@@ -84,7 +84,7 @@ export const scheduleReminder = (note) => {
       }
       
       // Mostrar notificación
-      showNotification('📝 Recordatorio: ' + note.title, {
+      showNotification('Recordatorio: ' + note.title, {
         body: note.content.substring(0, 100) + '...',
         tag: `reminder-${note.id}`,
         requireInteraction: true,
@@ -94,7 +94,7 @@ export const scheduleReminder = (note) => {
       showToast(`Recordatorio: ${note.title}`, 'warning');
     }, timeUntilReminder);
     
-    console.log(`✅ Recordatorio programado para: ${note.title}`);
+    console.log(`Recordatorio programado para: ${note.title}`);
   }
 };
 
@@ -112,7 +112,7 @@ export const showWelcomeNotification = async () => {
   const hasPermission = await requestNotificationPermission();
   
   if (hasPermission) {
-    showNotification('¡Bienvenido a NotitApp! 🎉', {
+    showNotification('¡Bienvenido a NotitApp!', {
       body: 'Tus notas están seguras y disponibles offline',
       tag: 'welcome',
     });
@@ -126,7 +126,7 @@ export const notifyNoteCreated = (noteTitle) => {
     navigator.vibrate(200);
   }
   
-  showToast(`✅ Nota "${noteTitle}" creada exitosamente`, 'success');
+  showToast(`Nota "${noteTitle}" creada exitosamente`, 'success');
 };
 
 // Notificación cuando se actualiza una nota
@@ -136,7 +136,7 @@ export const notifyNoteUpdated = (noteTitle) => {
     navigator.vibrate(100);
   }
   
-  showToast(`✏️ Nota "${noteTitle}" actualizada`, 'success');
+  showToast(`Nota "${noteTitle}" actualizada`, 'success');
 };
 
 // Notificación cuando se elimina una nota
@@ -146,14 +146,14 @@ export const notifyNoteDeleted = (noteTitle) => {
     navigator.vibrate([100, 50, 100]);
   }
   
-  showToast(`🗑️ Nota "${noteTitle}" eliminada`, 'warning');
+  showToast(`Nota "${noteTitle}" eliminada`, 'warning');
 };
 
 // Notificación de sincronización
 export const notifySyncComplete = () => {
-  showToast('🔄 Notas sincronizadas correctamente', 'success');
+  showToast('Notas sincronizadas correctamente', 'success');
 };
 
 export const notifySyncError = () => {
-  showToast('⚠️ Error al sincronizar. Trabajando offline.', 'error');
+  showToast('Error al sincronizar. Trabajando offline.', 'error');
 };

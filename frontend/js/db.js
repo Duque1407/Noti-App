@@ -1,4 +1,4 @@
-// db.js - Manejo de IndexedDB para persistencia offline
+// Manejo de IndexedDB para persistencia offline
 const DB_NAME = 'NotitAppDB';
 const DB_VERSION = 1;
 const STORE_NAME = 'notes';
@@ -15,7 +15,7 @@ const openDB = () => {
       if (!db.objectStoreNames.contains(STORE_NAME)) {
         const objectStore = db.createObjectStore(STORE_NAME, { keyPath: 'id' });
         objectStore.createIndex('updatedAt', 'updatedAt', { unique: false });
-        console.log('✅ Object Store creado');
+        console.log('Object Store creado');
       }
     };
     
@@ -105,10 +105,10 @@ export const syncNotesFromServer = async (serverNotes) => {
       await saveNoteOffline(note);
     }
     
-    console.log('✅ Notas sincronizadas con IndexedDB');
+    console.log('Notas sincronizadas con IndexedDB');
     return true;
   } catch (error) {
-    console.error('❌ Error al sincronizar:', error);
+    console.error('Error al sincronizar:', error);
     return false;
   }
 };

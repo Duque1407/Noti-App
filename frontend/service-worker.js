@@ -1,4 +1,4 @@
-// service-worker.js - Service Worker para NotitApp PWA
+// Service Worker para NotitApp PWA
 const CACHE_NAME = 'notitapp-v1';
 const API_CACHE = 'notitapp-api-v1';
 
@@ -152,9 +152,6 @@ self.addEventListener('sync', (event) => {
 const syncNotes = async () => {
   try {
     console.log('[SW] Sincronizando notas...');
-    
-    // Aquí puedes implementar lógica de sincronización
-    // Por ejemplo, enviar notas pendientes al servidor
     
     // Notificar a los clientes que la sincronización está completa
     const clients = await self.clients.matchAll();

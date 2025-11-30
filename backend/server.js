@@ -1,4 +1,4 @@
-// server.js - Servidor Express principal
+// Servidor Express principal
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -24,7 +24,7 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Ruta principal - servir index.html
+// Ruta principal (servir index.html)
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
@@ -39,14 +39,7 @@ app.use((req, res) => {
 
 // Iniciar servidor
 app.listen(PORT, () => {
-  console.log(`
-╔═══════════════════════════════════╗
-║     🚀 NotitApp Backend          ║
-║                                   ║
-║  Servidor: http://localhost:${PORT}  ║
-║  API:      http://localhost:${PORT}/api ║
-╚═══════════════════════════════════╝
-  `);
+  console.log(`Servidor: http://localhost:${PORT}`);
 });
 
 module.exports = app;

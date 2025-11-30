@@ -1,9 +1,9 @@
-// routes/notes.js - Rutas para operaciones CRUD de notas
+// Rutas para operaciones CRUD de notas
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
-// GET /api/notes - Obtener todas las notas
+// GET /api/notes (Obtener todas las notas)
 router.get('/', (req, res) => {
   try {
     const notes = db.prepare('SELECT * FROM notes ORDER BY updatedAt DESC').all();
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
   }
 });
 
-// GET /api/notes/:id - Obtener una nota específica
+// GET /api/notes/:id (Obtener una nota específica)
 router.get('/:id', (req, res) => {
   try {
     const note = db.prepare('SELECT * FROM notes WHERE id = ?').get(req.params.id);
@@ -26,7 +26,7 @@ router.get('/:id', (req, res) => {
   }
 });
 
-// POST /api/notes - Crear nueva nota
+// POST /api/notes (Crear nueva nota)
 router.post('/', (req, res) => {
   try {
     const { title, content, color, location, reminderDate } = req.body;
@@ -59,7 +59,7 @@ router.post('/', (req, res) => {
   }
 });
 
-// PUT /api/notes/:id - Actualizar nota existente
+// PUT /api/notes/:id (Actualizar nota existente)
 router.put('/:id', (req, res) => {
   try {
     const { title, content, color, location, reminderDate } = req.body;
@@ -84,7 +84,7 @@ router.put('/:id', (req, res) => {
   }
 });
 
-// DELETE /api/notes/:id - Eliminar nota
+// DELETE /api/notes/:id (Eliminar nota)
 router.delete('/:id', (req, res) => {
   try {
     const deleteStmt = db.prepare('DELETE FROM notes WHERE id = ?');

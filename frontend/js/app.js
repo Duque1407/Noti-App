@@ -1,4 +1,4 @@
-// app.js - Lógica principal de NotitApp
+// Lógica principal de NotitApp
 import * as API from './api.js';
 import * as DB from './db.js';
 import * as Notifications from './notifications.js';
@@ -17,15 +17,15 @@ const installBtn = document.getElementById('installBtn');
 
 // Inicializar aplicación
 document.addEventListener('DOMContentLoaded', async () => {
-  console.log('🚀 NotitApp iniciando...');
+  console.log('NotitApp iniciando...');
   
   // Registrar Service Worker
   if ('serviceWorker' in navigator) {
     try {
       const registration = await navigator.serviceWorker.register('/service-worker.js');
-      console.log('✅ Service Worker registrado:', registration);
+      console.log('Service Worker registrado:', registration);
     } catch (error) {
-      console.error('❌ Error al registrar Service Worker:', error);
+      console.error('Error al registrar Service Worker:', error);
     }
   }
   
@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Programar recordatorios activos
   Notifications.scheduleAllReminders(notes);
   
-  // Mostrar notificación de bienvenida (solo primera vez)
   if (!localStorage.getItem('welcomeShown')) {
     setTimeout(() => {
       Notifications.showWelcomeNotification();
@@ -49,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }, 2000);
   }
   
-  console.log('✅ NotitApp lista!');
+  console.log('NotitApp lista!');
 });
 
 // Cargar notas (intenta desde servidor, si falla usa IndexedDB)
@@ -62,13 +61,13 @@ const loadNotes = async () => {
     // Sincronizar con IndexedDB
     await DB.syncNotesFromServer(notes);
     
-    console.log(`✅ ${notes.length} notas cargadas desde servidor`);
+    console.log(`${notes.length} notas cargadas desde servidor`);
   } catch (error) {
-    console.warn('⚠️ No se pudo conectar al servidor, usando datos offline');
+    console.warn('No se pudo conectar al servidor, usando datos offline');
     
     // Cargar desde IndexedDB
     notes = await DB.getAllNotesOffline();
-    console.log(`📦 ${notes.length} notas cargadas desde IndexedDB`);
+    console.log(`${notes.length} notas cargadas desde IndexedDB`);
   }
   
   renderNotes();
@@ -177,7 +176,7 @@ const saveNote = async () => {
   const location = document.getElementById('noteLocation').value;
   
   if (!title || !content) {
-    Notifications.showToast('⚠️ Título y contenido son obligatorios', 'warning');
+    Notifications.showToast('Título y contenido son obligatorios', 'warning');
     return;
   }
   
@@ -236,9 +235,9 @@ const saveNote = async () => {
       noteModal.hide();
       clearForm();
       
-      Notifications.showToast('💾 Nota guardada offline. Se sincronizará cuando haya conexión.', 'info');
+      Notifications.showToast('Nota guardada offline. Se sincronizará cuando haya conexión.', 'info');
     } else {
-      Notifications.showToast('❌ Error al guardar la nota', 'error');
+      Notifications.showToast('Error al guardar la nota', 'error');
     }
   }
 };
@@ -289,9 +288,9 @@ window.deleteNoteHandler = async (id) => {
     if (!API.getConnectionStatus()) {
       await DB.deleteNoteOffline(id);
       await loadNotes();
-      Notifications.showToast('🗑️ Nota eliminada offline', 'warning');
+      Notifications.showToast('Nota eliminada offline', 'warning');
     } else {
-      Notifications.showToast('❌ Error al eliminar la nota', 'error');
+      Notifications.showToast('Error al eliminar la nota', 'error');
     }
   }
 };
@@ -299,27 +298,26 @@ window.deleteNoteHandler = async (id) => {
 // Obtener ubicación con Geolocation API
 const getLocation = () => {
   if (!navigator.geolocation) {
-    Notifications.showToast('⚠️ Tu navegador no soporta geolocalización', 'warning');
+    Notifications.showToast('Tu navegador no soporta geolocalización', 'warning');
     return;
   }
   
-  Notifications.showToast('📍 Obteniendo ubicación...', 'info');
+  Notifications.showToast('Obteniendo ubicación...', 'info');
   
   navigator.geolocation.getCurrentPosition(
     (position) => {
       const { latitude, longitude } = position.coords;
       const locationString = `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
       document.getElementById('noteLocation').value = locationString;
-      Notifications.showToast('✅ Ubicación obtenida', 'success');
+      Notifications.showToast('Ubicación obtenida', 'success');
       
-      // Vibrar para confirmar
       if ('vibrate' in navigator) {
         navigator.vibrate(100);
       }
     },
     (error) => {
       console.error('Error al obtener ubicación:', error);
-      Notifications.showToast('❌ No se pudo obtener la ubicación', 'error');
+      Notifications.showToast('No se pudo obtener la ubicación', 'error');
     }
   );
 };
