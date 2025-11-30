@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Metadatos básicos -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO -->
+  <meta name="description" content="NotitApp - Aplicación de notas con recordatorios. Funciona offline y se sincroniza automáticamente.">
+  <meta name="keywords" content="notas, recordatorios, PWA, offline, productividad">
+  <meta name="author" content="Carlos Manso">
+  
+  <!-- PWA -->
+  <meta name="theme-color" content="#caffbf">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="assets/icons/icon-192x192.png">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+  
+  <title>NotitApp - Tus Notas Siempre Contigo 📝</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-gradient sticky-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">
+        <i class="bi bi-journal-bookmark-fill"></i>
+        NotitApp
+      </a>
+      <div class="d-flex align-items-center gap-2">
+        <span id="connectionStatus" class="badge bg-success">
+          <i class="bi bi-wifi"></i> Online
+        </span>
+        <button class="btn btn-sm btn-outline-primary" id="installBtn" style="display: none;">
+          <i class="bi bi-download"></i> Instalar
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Contenedor principal -->
+  <div class="container my-4">
+    
+    <!-- Botón para nueva nota -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="mb-0">Mis Notas</h2>
+      <button class="btn btn-primary btn-lg rounded-pill" data-bs-toggle="modal" data-bs-target="#noteModal" id="newNoteBtn">
+        <i class="bi bi-plus-lg"></i> Nueva Nota
+      </button>
+    </div>
+
+    <!-- Contador de notas -->
+    <div class="alert alert-info d-flex align-items-center" role="alert">
+      <i class="bi bi-info-circle-fill me-2"></i>
+      <span id="notesCount">Cargando notas...</span>
+    </div>
+
+    <!-- Grid de notas -->
+    <div id="notesGrid" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <!-- Las notas se cargarán aquí dinámicamente -->
+    </div>
+
+    <!-- Mensaje cuando no hay notas -->
+    <div id="emptyState" class="text-center py-5" style="display: none;">
+      <i class="bi bi-journal-x display-1 text-muted"></i>
+      <h3 class="mt-3 text-muted">No tienes notas aún</h3>
+      <p class="text-muted">¡Crea tu primera nota para comenzar!</p>
+    </div>
+
+  </div>
+
+  <!-- Modal para crear/editar nota -->
+  <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title" id="noteModalLabel">
+            <i class="bi bi-journal-plus"></i> Nueva Nota
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="noteForm">
+            <input type="hidden" id="noteId">
+            
+            <!-- Título -->
+            <div class="mb-3">
+              <label for="noteTitle" class="form-label fw-bold">
+                <i class="bi bi-card-heading"></i> Título
+              </label>
+              <input type="text" class="form-control" id="noteTitle" placeholder="Título de tu nota" required>
+            </div>
+            
+            <!-- Contenido -->
+            <div class="mb-3">
+              <label for="noteContent" class="form-label fw-bold">
+                <i class="bi bi-textarea-t"></i> Contenido
+              </label>
+              <textarea class="form-control" id="noteContent" rows="5" placeholder="Escribe aquí..." required></textarea>
+            </div>
+            
+            <!-- Color -->
+            <div class="mb-3">
+              <label class="form-label fw-bold">
+                <i class="bi bi-palette-fill"></i> Color
+              </label>
+              <div class="d-flex gap-2 flex-wrap">
+                <input type="radio" class="btn-check" name="noteColor" id="color1" value="#caffbf" checked>
+                <label class="btn btn-color" for="color1" style="background-color: #caffbf;"></label>
+                
+                <input type="radio" class="btn-check" name="noteColor" id="color2" value="#ffd6a5">
+                <label class="btn btn-color" for="color2" style="background-color: #ffd6a5;"></label>
+                
+                <input type="radio" class="btn-check" name="noteColor" id="color3" value="#fdffb6">
+                <label class="btn btn-color" for="color3" style="background-color: #fdffb6;"></label>
+                
+                <input type="radio" class="btn-check" name="noteColor" id="color4" value="#ffadad">
+                <label class="btn btn-color" for="color4" style="background-color: #ffadad;"></label>
+                
+                <input type="radio" class="btn-check" name="noteColor" id="color5" value="#bdb2ff">
+                <label class="btn btn-color" for="color5" style="background-color: #bdb2ff;"></label>
+              </div>
+            </div>
+            
+            <!-- Recordatorio -->
+            <div class="mb-3">
+              <label for="reminderDate" class="form-label fw-bold">
+                <i class="bi bi-alarm"></i> Recordatorio (opcional)
+              </label>
+              <input type="datetime-local" class="form-control" id="reminderDate">
+            </div>
+            
+            <!-- Ubicación -->
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <label class="form-label fw-bold mb-0">
+                  <i class="bi bi-geo-alt-fill"></i> Ubicación
+                </label>
+                <button type="button" class="btn btn-sm btn-outline-primary" id="getLocationBtn">
+                  <i class="bi bi-crosshair"></i> Obtener ubicación
+                </button>
+              </div>
+              <input type="text" class="form-control mt-2" id="noteLocation" placeholder="Ubicación guardada aquí" readonly>
+            </div>
+            
+          </form>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="saveNoteBtn">
+            <i class="bi bi-check-lg"></i> Guardar Nota
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast para notificaciones -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="notificationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <i class="bi bi-bell-fill me-2"></i>
+        <strong class="me-auto">NotitApp</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body" id="toastMessage">
+        Mensaje
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Módulos JavaScript -->
+  <script type="module" src="js/app.js"></script>
+  
+</body>
+</html>

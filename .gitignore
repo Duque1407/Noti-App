@@ -1,0 +1,50 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Base de datos
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+logs/
+*.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos temporales
+*.tmp
+*.temp
+.cache/
+
+# Variables de entorno
+.env
+.env.local
+.env.*.local
+
+# Build
+dist/
+build/
+*.min.js
+*.min.css
+
+# Testing
+coverage/
+.nyc_output/
+
+# Dependencias opcionales
+.npm
+.eslintcache

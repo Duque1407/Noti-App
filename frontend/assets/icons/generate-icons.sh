@@ -1,0 +1,32 @@
+#!/bin/bash
+# Script para generar iconos PWA desde un único SVG
+
+# Crear SVG base con diseño de nota
+cat > icon-base.svg << 'SVGEOF'
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#caffbf;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffd6a5;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Fondo -->
+  <rect width="512" height="512" rx="80" fill="url(#grad)"/>
+  
+  <!-- Nota (papel) -->
+  <rect x="80" y="120" width="352" height="300" rx="20" fill="white" opacity="0.95"/>
+  
+  <!-- Líneas de texto -->
+  <line x1="120" y1="180" x2="392" y2="180" stroke="#333" stroke-width="8" stroke-linecap="round"/>
+  <line x1="120" y1="240" x2="350" y2="240" stroke="#333" stroke-width="8" stroke-linecap="round"/>
+  <line x1="120" y1="300" x2="380" y2="300" stroke="#333" stroke-width="8" stroke-linecap="round"/>
+  <line x1="120" y1="360" x2="320" y2="360" stroke="#333" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Lápiz decorativo -->
+  <rect x="360" y="80" width="80" height="25" rx="5" fill="#bdb2ff" transform="rotate(45 400 92)"/>
+  <polygon points="420,60 435,75 425,85 410,70" fill="#333"/>
+</svg>
+SVGEOF
+
+echo "✅ SVG base creado"

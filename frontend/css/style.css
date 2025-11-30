@@ -1,0 +1,265 @@
+/* style.css - Estilos personalizados para NotitApp */
+
+/* Variables CSS - Paleta de colores pastel */
+:root {
+  --color-primary: #caffbf;
+  --color-secondary: #ffd6a5;
+  --color-accent: #bdb2ff;
+  --color-success: #9bf6ff;
+  --color-danger: #ffadad;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Reset y estilos generales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #fff5f7 0%, #f0f8ff 100%);
+  min-height: 100vh;
+}
+
+/* Navbar personalizado */
+.navbar {
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%) !important;
+  backdrop-filter: blur(10px);
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  color: #333 !important;
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+}
+
+/* Botones personalizados */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-accent) 0%, #a594f9 100%);
+  border: none;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  background: linear-gradient(135deg, #a594f9 0%, var(--color-accent) 100%);
+}
+
+.btn-color {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-check:checked + .btn-color {
+  border-color: #333;
+  transform: scale(1.1);
+  box-shadow: var(--shadow);
+}
+
+/* Tarjetas de notas */
+.note-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+.note-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+.note-card .card-body {
+  padding: 1.5rem;
+}
+
+.note-card-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: #333;
+}
+
+.note-card-text {
+  color: #555;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.note-metadata {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.note-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 5px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.note-card:hover .note-actions {
+  opacity: 1;
+}
+
+.note-actions .btn {
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  box-shadow: var(--shadow);
+}
+
+/* Modal personalizado */
+.modal-content {
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  border-radius: 20px 20px 0 0;
+}
+
+/* Formulario */
+.form-control:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 0.2rem rgba(189, 178, 255, 0.25);
+}
+
+textarea.form-control {
+  resize: none;
+}
+
+/* Toast personalizado */
+.toast {
+  border-radius: 10px;
+  box-shadow: var(--shadow-hover);
+}
+
+.toast-header {
+  background: var(--color-primary);
+  border-radius: 10px 10px 0 0;
+}
+
+/* Badge de conexión */
+#connectionStatus {
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+#connectionStatus.offline {
+  background-color: var(--color-danger) !important;
+}
+
+/* Empty state */
+#emptyState {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animaciones */
+.note-card {
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+  
+  .note-card-title {
+    font-size: 1.1rem;
+  }
+  
+  .btn-color {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Loading spinner */
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+  border-width: 0.15em;
+}
+
+/* Accesibilidad */
+.btn:focus,
+.form-control:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .navbar,
+  .btn,
+  .modal,
+  .toast-container {
+    display: none !important;
+  }
+  
+  .note-card {
+    page-break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+}
