@@ -6,22 +6,22 @@ Una aplicación minimalista y adorable para crear, gestionar y sincronizar notas
 
 ---
 
-## 🚀 Características
+## Características
 
-### ✅ Funcionalidades Core
+### Funcionalidades Core
 - **CRUD Completo**: Crear, Leer, Actualizar y Eliminar notas
 - **Colores Personalizables**: 5 colores pastel para organizar visualmente
 - **Recordatorios**: Programar alertas para tus notas importantes
 - **Geolocalización**: Guardar ubicación opcional en cada nota
 - **Sincronización Automática**: Los cambios se sincronizan cuando hay conexión
 
-### ✅ Progressive Web App (PWA)
+### Progressive Web App (PWA)
 - **Instalable**: Se puede instalar como app nativa en cualquier dispositivo
 - **Funciona Offline**: Acceso completo sin conexión a internet
 - **Service Worker**: Cache inteligente para máximo rendimiento
 - **Manifest Configurado**: Íconos, colores y configuración completa
 
-### ✅ APIs Nativas
+### APIs Nativas
 - **IndexedDB**: Persistencia local de datos
 - **Geolocation API**: Captura de ubicación GPS
 - **Notification API**: Notificaciones push para recordatorios
@@ -228,7 +228,7 @@ La aplicación usa una paleta pastel minimalista:
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### El servidor no inicia
 ```bash
@@ -265,9 +265,10 @@ kill -9 $(lsof -ti:3000)
 
 ---
 
-## 👨‍💻 Autor
+## 👨‍💻 Autores
 
-**Carlos Manso**  
+**Guillermo Díaz Hernández Duque**
+**Edgar Mario Gallgos Muños**  
 Universidad Tecnológica de Aguascalientes  
 Ingeniería en Desarrollo y Gestión de Software
 
@@ -281,17 +282,17 @@ MIT License - Proyecto educativo para la materia de Aplicaciones Web Progresivas
 
 ## 🎯 Cumplimiento de Requisitos
 
-### ✅ Estructura y Organización (5%)
+### Estructura y Organización (5%)
 - Estructura clara con src/, components/, assets/
 - Control de versiones con Git
 - Convenciones de nombres coherentes
 
-### ✅ Buenas Prácticas HTML/CSS/JS (13%)
+### Buenas Prácticas HTML/CSS/JS (13%)
 - Metadatos SEO y accesibilidad completos
 - Estilos separados en archivos
 - JavaScript modular y comentado
 
-### ✅ PWA Específicas (45%)
+### PWA Específicas (45%)
 - Manifest.json correctamente configurado
 - Service Worker con estrategias de cache
 - Push notifications implementadas
@@ -299,28 +300,18 @@ MIT License - Proyecto educativo para la materia de Aplicaciones Web Progresivas
 - APIs nativas (Geolocation, Vibration, Notification)
 - Aplicación instalable
 
-### ✅ Entregables (37%)
+### Entregables (37%)
 - Repositorio GitHub completo
 - Video de funcionalidad (pendiente)
 - Informe técnico (este README + documentación)
 
 ---
 
-## 🚀 Próximos Pasos
+## Próximos Pasos
 
 Para preparar la entrega final:
 
-1. **Inicializar Git**:
-```bash
-cd notit-app
-git init
-git add .
-git commit -m "Initial commit: NotitApp PWA completa"
-```
-
-2. **Crear repositorio en GitHub** y subir el código
-
-3. **Grabar video demostrativo** mostrando:
+1. **Grabar video demostrativo** mostrando:
    - Creación de notas
    - Edición y eliminación
    - Uso de geolocalización
@@ -328,10 +319,6 @@ git commit -m "Initial commit: NotitApp PWA completa"
    - Modo offline
    - Instalación PWA
 
-4. **Ejecutar Lighthouse** y capturar screenshots de los resultados
+2. **Ejecutar Lighthouse** y capturar screenshots de los resultados
 
-5. **Crear informe técnico** basado en esta documentación
-
----
-
-**¡NotitApp está lista para usarse! 🎉**
+3. **Crear informe técnico** basado en esta documentación
