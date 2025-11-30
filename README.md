@@ -268,6 +268,7 @@ kill -9 $(lsof -ti:3000)
 ## 👨‍💻 Autores
 
 **Guillermo Díaz Hernández Duque**
+y
 **Edgar Mario Gallgos Muños**  
 Universidad Tecnológica de Aguascalientes  
 Ingeniería en Desarrollo y Gestión de Software
